@@ -1,12 +1,25 @@
 package com.bnta.university_enrollment.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "classes")
 public class Class {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
     private String title;
+    @Column
     private String description;
+    @ManyToMany
+    @JoinTable(name = "enrollments",
+            joinColumns = {@JoinColumn(name = "student_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "class_id", nullable = false)})
+    @JsonIgnoreProperties({"classes"})
     private List<Student> students;
 
     protected Class() {
