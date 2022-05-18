@@ -1,15 +1,18 @@
 package com.bnta.university_enrollment.controllers;
 
+import com.bnta.university_enrollment.models.Student;
 import com.bnta.university_enrollment.models.Subject;
 import com.bnta.university_enrollment.repositories.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("subjects")
@@ -22,5 +25,12 @@ public class SubjectController {
     @GetMapping
     public ResponseEntity<List<Subject>> getSubjects(){
         return new ResponseEntity<>(subjectRepository.findAll(), HttpStatus.OK);
+    }
+
+    //SHOW
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Subject>> getStudent(@PathVariable Long id){
+        var subject = subjectRepository.findById(id);
+        return new ResponseEntity<>(subject, subject.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
 }
