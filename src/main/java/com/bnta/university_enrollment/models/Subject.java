@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "classes")
-public class Class {
+@Table(name = "subjects")
+public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,14 +18,14 @@ public class Class {
     @ManyToMany
     @JoinTable(name = "enrollments",
             joinColumns = {@JoinColumn(name = "student_id", nullable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "class_id", nullable = false)})
-    @JsonIgnoreProperties({"classes"})
+            inverseJoinColumns = {@JoinColumn(name = "subject_id", nullable = false)})
+    @JsonIgnoreProperties({"subjects"})
     private List<Student> students;
 
-    protected Class() {
+    protected Subject() {
     }
 
-    public Class(String title, String description, List<Student> students) {
+    public Subject(String title, String description, List<Student> students) {
         this.title = title;
         this.description = description;
         this.students = students;
@@ -61,7 +61,7 @@ public class Class {
 
     @Override
     public String toString() {
-        return "Class{" +
+        return "Subject{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +

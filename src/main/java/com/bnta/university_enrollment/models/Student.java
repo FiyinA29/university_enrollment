@@ -20,7 +20,7 @@ public class Student {
     private LocalDate dob;
     @ManyToMany(mappedBy = "students")
     @JsonIgnoreProperties({"students"})
-    private List<Class> classes;
+    private List<Subject> subjects;
 
     protected Student() {
     }
@@ -29,7 +29,7 @@ public class Student {
         this.firstName = firstName;
         this.surname = surname;
         this.dob = dob;
-        this.classes = new ArrayList<Class>();
+        this.subjects = new ArrayList<Subject>();
     }
 
     public Long getId() {
@@ -60,20 +60,20 @@ public class Student {
         this.dob = dob;
     }
 
-    public List<Class> getClasses() {
-        return classes;
+    public List<Subject> getSubjects() {
+        return subjects;
     }
 
-    public void setClasses(List<Class> classes) {
-        this.classes = classes;
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
     }
 
-    public void addClass(Class subj){ //Couldn't use 'class' as a variable name
-        this.classes.add(subj);
+    public void addSubject(Subject subject){
+        this.subjects.add(subject);
     }
 
-    public boolean removeClass(Class subj){
-        return this.classes.remove(subj);
+    public boolean removeSubject(Subject subject){
+        return this.subjects.remove(subject);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class Student {
                 ", firstName='" + firstName + '\'' +
                 ", surname='" + surname + '\'' +
                 ", dob=" + dob +
-                ", classes=" + classes +
+                ", subjects=" + subjects +
                 '}';
     }
 }
