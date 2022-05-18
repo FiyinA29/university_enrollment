@@ -4,19 +4,20 @@ import com.bnta.university_enrollment.models.Subject;
 import com.bnta.university_enrollment.models.Student;
 import com.bnta.university_enrollment.repositories.SubjectRepository;
 import com.bnta.university_enrollment.repositories.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Component;
 
 
 import java.time.LocalDate;
 import java.util.Arrays;
 
-
+@Component
 public class DataLoader implements ApplicationRunner {
-
-
+    @Autowired
     private StudentRepository studentRepository;
-
+    @Autowired
     private SubjectRepository subjectRepository;
     @Override
     public void run(ApplicationArguments args) throws Exception {
