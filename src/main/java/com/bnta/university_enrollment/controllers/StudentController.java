@@ -19,7 +19,10 @@ public class StudentController {
 
     //INDEX
     @GetMapping
-    public ResponseEntity<List<Student>> getStudent(){
+    public ResponseEntity<List<Student>> getAllStudentAndFilters(@RequestParam(required = false, name = "surname") String surname){
+        if (surname!= null){
+            return new ResponseEntity<>(studentRepository.findBySurname(surname), HttpStatus.OK);
+        }
         return new ResponseEntity<>(studentRepository.findAll(), HttpStatus.OK);
     }
 
@@ -38,8 +41,8 @@ public class StudentController {
 
     //DELETE
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Long> deleteStudent(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Optional<Student>> deleteStudent(@PathVariable Long id){
         studentRepository.deleteById(id);
-        return ResponseEntity.ok(id);
+        return new ResponseEntity<>(studentRepository.findById(id), HttpStatus.OK);
     }
 }

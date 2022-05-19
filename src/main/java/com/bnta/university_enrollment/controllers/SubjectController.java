@@ -1,8 +1,11 @@
 package com.bnta.university_enrollment.controllers;
 
+import com.bnta.university_enrollment.models.Student;
 import com.bnta.university_enrollment.models.Subject;
 import com.bnta.university_enrollment.repositories.SubjectRepository;
+import org.hibernate.annotations.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +22,10 @@ public class SubjectController {
 
     //INDEX
     @GetMapping
-    public ResponseEntity<List<Subject>> getSubjects(){
+    public ResponseEntity<List<Subject>> getAllSubjectsAndFilters(@RequestParam(required = false, name = "title") String title){
+        if (title!= null){
+            return new ResponseEntity<>(subjectRepository.findByTitle(title), HttpStatus.OK);
+        }
         return new ResponseEntity<>(subjectRepository.findAll(), HttpStatus.OK);
     }
 
@@ -38,8 +44,8 @@ public class SubjectController {
 
     //DELETE
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Long> deleteSubject(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Optional<Subject>> deleteSubject(@PathVariable Long id){
         subjectRepository.deleteById(id);
-        return ResponseEntity.ok(id);
+        return new ResponseEntity<>(subjectRepository.findById(id), HttpStatus.OK);
     }
 }
