@@ -36,4 +36,11 @@ public class SubjectController {
     public void createSubject(@RequestBody Subject subject){
         subjectRepository.save(subject);
     }
+
+    //DELETE
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Long> deleteSubject(@PathVariable(value = "id") Long id) {
+        subjectRepository.deleteById(id);
+        return ResponseEntity.ok(id);
+    }
 }
