@@ -3,5 +3,8 @@ package com.bnta.university_enrollment.repositories;
 import com.bnta.university_enrollment.models.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
+    List<Subject> findByTitle(String title);
 }

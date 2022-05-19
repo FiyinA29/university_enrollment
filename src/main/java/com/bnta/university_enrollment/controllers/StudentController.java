@@ -1,7 +1,6 @@
 package com.bnta.university_enrollment.controllers;
 
 import com.bnta.university_enrollment.models.Student;
-import com.bnta.university_enrollment.models.Subject;
 import com.bnta.university_enrollment.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +16,6 @@ public class StudentController {
 
     @Autowired
     private StudentRepository studentRepository;
-    @Autowired
-    private Student student;
 
     //INDEX
     @GetMapping

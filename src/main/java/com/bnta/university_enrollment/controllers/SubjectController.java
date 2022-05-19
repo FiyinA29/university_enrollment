@@ -1,6 +1,5 @@
 package com.bnta.university_enrollment.controllers;
 
-import com.bnta.university_enrollment.models.Student;
 import com.bnta.university_enrollment.models.Subject;
 import com.bnta.university_enrollment.repositories.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
